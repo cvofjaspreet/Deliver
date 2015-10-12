@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import jaspreet.deliver.R;
+import jaspreet.deliver.database.Prefrences;
 import jaspreet.deliver.utils.Config;
 import jaspreet.deliver.utils.Util;
 import jaspreet.deliver.utils.ViewUtil;
@@ -24,11 +25,26 @@ import jaspreet.deliver.xmppFramework.XMPPService;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static String TAG;
+    private Prefrences prefrences;
+
+    public Prefrences getPrefrences() {
+        return prefrences;
+    }
+
+    public void setPrefrences(Prefrences prefrences) {
+        this.prefrences = prefrences;
+    }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         TAG=this.getLocalClassName();
+        setPrefrences(Prefrences.getInstance(MainActivity.this));
+
+        if(getPrefrences().isRegistered() && getPrefrences().isProfileSet()){
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,6 +65,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        }else{
+            finish();
+            Intent intent=new Intent(MainActivity.this,RegisterActivity.class);
+            startActivity(intent);
+        }
 
         if(Util.haveNetworkConnection(MainActivity.this)) {
             Intent intent = new Intent(MainActivity.this, XMPPService.class);

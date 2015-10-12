@@ -13,6 +13,8 @@ public class Prefrences {
 
     private static String USER_NAME="USER_NAME";
     private static String PASSWORD="PASSWORD";
+    private static String IS_REGISTERED="IS_REGISTERED";
+    private static String IS_PROFILE_SET="IS_PROFILE_SET";
 
     static SharedPreferences pref;
     private static Prefrences ourInstance ;
@@ -45,6 +47,23 @@ public class Prefrences {
 
     public String getPassword() {
         return pref.getString(PASSWORD, "9319396142");
+    }
+
+
+    public void setRegistered(boolean registered) {
+        pref.edit().putBoolean(IS_REGISTERED, registered).commit();
+    }
+
+    public boolean isRegistered() {
+        return pref.getBoolean(IS_REGISTERED, false);
+    }
+
+    public void setProfile(boolean set) {
+        pref.edit().putBoolean(IS_PROFILE_SET, set).commit();
+    }
+
+    public boolean isProfileSet() {
+        return pref.getBoolean(IS_PROFILE_SET, false);
     }
 
 }

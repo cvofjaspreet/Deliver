@@ -15,12 +15,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "ip", "192.168.0.101"
+            resValue "string", "ip", "192.168.0.107"
             resValue "string", "resource", "deliver-live"
         }
         debug {
-            resValue "string", "ip", "192.168.0.101"
-            resValue "string", "ip", "192.168.0.101"
+            resValue "string", "ip", "192.168.0.107"
             resValue "string", "resource", "deliver-debug"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -35,4 +34,5 @@ dependencies {
     compile 'com.android.support:design:23.0.1'
     compile "org.igniterealtime.smack:smack-android:4.1.0"
     compile "org.igniterealtime.smack:smack-tcp:4.1.0"
+    compile "org.igniterealtime.smack:smack-extensions:4.1.0"
 }

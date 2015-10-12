@@ -62,7 +62,10 @@ public class XMPPlogin extends Thread{
         try {
             SASLAuthentication.unBlacklistSASLMechanism("PLAIN");
             SASLAuthentication.blacklistSASLMechanism("DIGEST-MD5");
+            if(!getUserName().equals(""))
             getXmpptcpConnection().login(getUserName(),getPassword(),getResource());
+            else
+            getXmpptcpConnection().loginAnonymously();
         } catch (XMPPException e) {
             e.printStackTrace();
         } catch (SmackException e) {

@@ -30,4 +30,14 @@ public class Util {
         return ret ;
     }
 
+    public static String getUserName(String string) {
+        if(string.contains("@"))
+            return string.substring(0, string.indexOf('@'));
+        else
+            return string;
+
+    }
+
+
+
 }

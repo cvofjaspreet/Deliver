@@ -60,7 +60,7 @@ public class XmppConnection {
 
     private static XmppConnection ourInstance = new XmppConnection();
 
-    public static XmppConnection getInstance(Context context) {
+    public static XmppConnection getInstance() {
 
         return ourInstance;
     }
