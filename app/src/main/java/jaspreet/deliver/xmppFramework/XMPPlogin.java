@@ -15,7 +15,15 @@ public class XMPPlogin extends Thread{
     private String password;
     private XMPPTCPConnection xmpptcpConnection;
     private String resource;
+    private AccountListener accountListener;
 
+    public AccountListener getAccountListener() {
+        return accountListener;
+    }
+
+    public void setAccountListener(AccountListener accountListener) {
+        this.accountListener = accountListener;
+    }
     public String getResource() {
         return resource;
     }
@@ -55,7 +63,13 @@ public class XMPPlogin extends Thread{
         setPassword(password);
         setResource(resource);
     }
-
+    public XMPPlogin(XMPPTCPConnection xmpptcpConnection,String userName,String password,String resource,AccountListener accountListener){
+        setAccountListener(accountListener);
+        setXmpptcpConnection(xmpptcpConnection);
+        setUserName(userName);
+        setPassword(password);
+        setResource(resource);
+    }
     @Override
     public void run() {
         super.run();
@@ -66,12 +80,22 @@ public class XMPPlogin extends Thread{
             getXmpptcpConnection().login(getUserName(),getPassword(),getResource());
             else
             getXmpptcpConnection().loginAnonymously();
+
+            if(getAccountListener()!=null) {
+                getAccountListener().onSucess();
+            }
         } catch (XMPPException e) {
             e.printStackTrace();
+            if(getAccountListener()!=null)
+            getAccountListener().onError();
         } catch (SmackException e) {
             e.printStackTrace();
+            if(getAccountListener()!=null)
+            getAccountListener().onError();
         } catch (IOException e) {
             e.printStackTrace();
+            if(getAccountListener()!=null)
+            getAccountListener().onError();
         }
 
     }

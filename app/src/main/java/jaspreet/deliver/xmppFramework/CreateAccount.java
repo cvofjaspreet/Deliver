@@ -98,12 +98,18 @@ public class CreateAccount extends Thread {
             getPrefrences().setUserName(Util.getUserName(getEmail()));
             getPrefrences().setPassword(getPassword());
             getAccountListener().onSucess();
-            getPrefrences().setRegistered(true);
         } catch (SmackException.NoResponseException e) {
             e.printStackTrace();
             getAccountListener().onError();
         } catch (XMPPException.XMPPErrorException e) {
             e.printStackTrace();
+            if(e.getMessage().equals("XMPPError: conflict - cancel")) {
+                getXmpptcpConnection().disconnect();
+                doConnect();
+                getPrefrences().setUserName(Util.getUserName(getEmail()));
+                getPrefrences().setPassword(getPassword());
+                doLogin();
+            }else
             getAccountListener().onError();
         } catch (SmackException.NotConnectedException e) {
             e.printStackTrace();
@@ -113,5 +119,11 @@ public class CreateAccount extends Thread {
 
         Intent intent=new Intent(getContext(),XMPPService.class);
         getContext().startService(intent);
+    }
+    public void doConnect(){
+        XmppConnection.getInstance().connect();
+    }
+    public void doLogin(){
+        XmppConnection.getInstance().login(getAccountListener());
     }
 }

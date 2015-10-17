@@ -1,9 +1,10 @@
 package jaspreet.deliver.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,8 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
 import jaspreet.deliver.R;
 import jaspreet.deliver.database.Prefrences;
+import jaspreet.deliver.fragments.MainContainerFragment;
+import jaspreet.deliver.fragments.SelectLocationFragment;
 import jaspreet.deliver.utils.Config;
 import jaspreet.deliver.utils.Util;
 import jaspreet.deliver.utils.ViewUtil;
@@ -26,7 +33,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static String TAG;
     private Prefrences prefrences;
-
+    int PLACE_PICKER_REQUEST_PICKUP = 1;
+    int PLACE_PICKER_REQUEST_DESTINATION = 2;
     public Prefrences getPrefrences() {
         return prefrences;
     }
@@ -42,20 +50,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         TAG=this.getLocalClassName();
         setPrefrences(Prefrences.getInstance(MainActivity.this));
-
-        if(getPrefrences().isRegistered() && getPrefrences().isProfileSet()){
-
         setContentView(R.layout.activity_main);
+        if(getPrefrences().isRegistered() && getPrefrences().isProfileSet()){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ViewUtil.showStackBar(view,"will replce",MainActivity.this);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,6 +78,16 @@ public class MainActivity extends AppCompatActivity
         }else{
             ViewUtil.showStackBar(findViewById(R.id.login),getString(R.string.no_internet_connectiion),MainActivity.this);
         }
+
+        openMainFragment();
+    }
+
+    public void openMainFragment(){
+
+        Fragment mainContainer = new MainContainerFragment();
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.container, mainContainer, "register");
+        ft.commit();
     }
 
     @Override
@@ -91,12 +100,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -106,9 +110,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -148,6 +150,27 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
 
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.deactivateApp(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+            Place place = PlacePicker.getPlace(data, MainActivity.this);
+            SelectLocationFragment.getInstance().gotPlace(requestCode, resultCode, place);
 
     }
 }

@@ -1,6 +1,14 @@
 package jaspreet.deliver.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.util.Base64;
+import android.util.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
 
 /**
  * Created by jaspret on 11/10/15.
@@ -38,6 +46,27 @@ public class Util {
 
     }
 
+   /* for facebook keyhash*/
+
+    public static void  getKeyHash(Context context){
+
+        // Add code to print out the key hash
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    "jaspreet.deliver",
+                    PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
+    }
 
 
 }

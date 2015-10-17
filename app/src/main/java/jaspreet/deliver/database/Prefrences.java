@@ -15,6 +15,7 @@ public class Prefrences {
     private static String PASSWORD="PASSWORD";
     private static String IS_REGISTERED="IS_REGISTERED";
     private static String IS_PROFILE_SET="IS_PROFILE_SET";
+    private static String IS_FACEBOOK_CONNECTED="IS_FACEBOOK_CONNECTED";
 
     static SharedPreferences pref;
     private static Prefrences ourInstance ;
@@ -50,6 +51,7 @@ public class Prefrences {
     }
 
 
+
     public void setRegistered(boolean registered) {
         pref.edit().putBoolean(IS_REGISTERED, registered).commit();
     }
@@ -64,6 +66,14 @@ public class Prefrences {
 
     public boolean isProfileSet() {
         return pref.getBoolean(IS_PROFILE_SET, false);
+    }
+
+    public void setFbConnected(boolean connected) {
+        pref.edit().putBoolean(IS_FACEBOOK_CONNECTED, connected).commit();
+    }
+
+    public boolean isFbConnected() {
+        return pref.getBoolean(IS_FACEBOOK_CONNECTED, false);
     }
 
 }

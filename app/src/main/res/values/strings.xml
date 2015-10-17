@@ -26,6 +26,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="action_continue">Continue</string>
+    <string name="action_confirm">Confirm</string>
+    <!--For facebook-->
+    <string name="facebook_app_id">161084960905227</string>
+    <string name="title_activity_maps">Map</string>
 
 
+    <!--For Address-->
+    <string name="prompt_pickup">Select pickup address</string>
+    <string name="prompt_dropoff">Select destination address</string>
 </resources>

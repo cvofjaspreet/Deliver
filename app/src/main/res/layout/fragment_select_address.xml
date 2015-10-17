@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:id="@+id/map"
+        tools:context="jaspreet.deliver.activities.MapsActivity"
+        android:name="com.google.android.gms.maps.MapFragment" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
+    <TextView android:id="@+id/pickupLocation" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="@string/prompt_pickup"
+        android:inputType="textEmailAddress" android:maxLines="2"
+        android:ellipsize="end"
+        android:background="@color/colorPrimaryTransparent"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:drawableRight="@mipmap/ic_location_searching_white_24dp"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@mipmap/ic_location_on_white_24dp"
+        />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            android:layout_marginLeft="40dp"
+        ></View>
+    <TextView android:id="@+id/dropofLocation" android:layout_width="match_parent"
+        android:layout_below="@+id/pickupLocation"
+        android:textColor="@android:color/white"
+        android:ellipsize="end"
+        android:textColorHint="@android:color/white"
+        android:drawableLeft="@mipmap/ic_location_on_white_24dp"
+        android:background="@color/colorPrimaryTransparent"
+        android:layout_height="wrap_content" android:hint="@string/prompt_dropoff"
+        android:inputType="textEmailAddress" android:maxLines="2"
+        android:drawableRight="@mipmap/ic_location_searching_white_24dp"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        />
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="16dp"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/ic_done_all_white_24dp" />
+</RelativeLayout>

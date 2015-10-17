@@ -89,7 +89,10 @@ public class XmppConnection {
         xmpplogin.start();
     }
 
-
+    public void login(AccountListener accountListener){
+        XMPPlogin xmpplogin=new XMPPlogin(getXmpptcpConnection(),getPreference().getUserName(),getPreference().getPassword(),getContext().getString(R.string.resource),accountListener);
+        xmpplogin.start();
+    }
 
 
 

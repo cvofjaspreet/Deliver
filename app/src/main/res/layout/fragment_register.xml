@@ -6,7 +6,10 @@
 
 
     <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="16dp"
+        >
 
         <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
@@ -34,9 +37,28 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button android:id="@+id/email_sign_in_button" style="?android:textAppearanceSmall"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="50dp" android:text="@string/action_sign_in"
+                android:textStyle="bold"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/white"
+                android:background="@drawable/rounded_corner_border"
+                />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+            <com.facebook.login.widget.LoginButton
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp" />
+</RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
