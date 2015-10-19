@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,12 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.squareup.picasso.Picasso;
 
 import jaspreet.deliver.R;
+import jaspreet.deliver.adapter.CategoriesAdapter;
 import jaspreet.deliver.database.Prefrences;
 import jaspreet.deliver.fragments.MainContainerFragment;
 import jaspreet.deliver.fragments.SelectLocationFragment;
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static String TAG;
     private Prefrences prefrences;
+    private ImageView imageView;
+    private Spinner categories;
+    private TextView nickNameText,email;
     int PLACE_PICKER_REQUEST_PICKUP = 1;
     int PLACE_PICKER_REQUEST_DESTINATION = 2;
     public Prefrences getPrefrences() {
@@ -54,8 +64,11 @@ public class MainActivity extends AppCompatActivity
         if(getPrefrences().isRegistered() && getPrefrences().isProfileSet()){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        categories=(Spinner)findViewById(R.id.categories);
+        imageView=(ImageView)findViewById(R.id.imageView);
+        nickNameText=(TextView)findViewById(R.id.nickNameText);
+        email=(TextView)findViewById(R.id.email);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -64,8 +77,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        setProfile();
+        addCaterories();
+        openMainFragment();
         }else{
             finish();
             Intent intent=new Intent(MainActivity.this,RegisterActivity.class);
@@ -79,7 +93,22 @@ public class MainActivity extends AppCompatActivity
             ViewUtil.showStackBar(findViewById(R.id.login),getString(R.string.no_internet_connectiion),MainActivity.this);
         }
 
-        openMainFragment();
+
+    }
+
+    public void addCaterories(){
+
+        CategoriesAdapter spinnerAdapter = new CategoriesAdapter(this);
+        categories.setAdapter(spinnerAdapter);
+    }
+
+    public void setProfile(){
+        if(!getPrefrences().getUserPicUrl().equals(""))
+        Picasso.with(MainActivity.this)
+                .load(getPrefrences().getUserPicUrl())
+                .into(imageView);
+        nickNameText.setText(getPrefrences().getNickName());
+        email.setText(getPrefrences().getEmail());
     }
 
     public void openMainFragment(){
@@ -100,6 +129,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
 
     @Override
@@ -169,8 +205,10 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if(resultCode==RESULT_OK) {
             Place place = PlacePicker.getPlace(data, MainActivity.this);
             SelectLocationFragment.getInstance().gotPlace(requestCode, resultCode, place);
+        }
 
     }
 }
