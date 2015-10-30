@@ -1,0 +1,286 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+<ScrollView 
+   android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:fillViewport="true" 
+        android:layout_marginBottom="10dp"
+    >
+   <RelativeLayout 
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/content"
+       >
+
+        <TextView
+            android:id="@+id/register_user_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:gravity="center"
+            android:text="@string/register_user_text"
+            android:textColor="@color/colorAccent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:lineSpacingExtra="7dp"
+            android:textAppearance="@android:style/TextAppearance.Small" />
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/register_user_text1"
+            android:id="@+id/register_user_text_friends"
+            android:gravity="center_horizontal"
+            android:text="@string/register_user_text_friends"
+             android:textColor="@color/white"
+             android:visibility="gone"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+             android:background="@color/colorPrimary"
+             android:layout_below="@+id/register_user_text_friends"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            android:id="@+id/view_1"
+            />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/view_1"
+            android:id="@+id/selectCountryLayout"
+            >
+
+            <TextView
+                android:id="@+id/register_user_country"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                 android:textColor="@color/colorPrimary"
+                android:layout_toLeftOf="@+id/register_user_arrow"
+                android:text="@string/register_user_default_country"
+                android:paddingLeft="10dp"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+            <ImageView
+                android:id="@+id/register_user_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="visible"
+                android:src="@drawable/arrow1" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view_2"
+            android:layout_below="@+id/selectCountryLayout"
+            />
+        <LinearLayout
+            android:id="@+id/register_user_county_code_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="6dp"
+            android:layout_below="@+id/view_2"
+            android:orientation="horizontal" >
+
+            <LinearLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:gravity="center"
+               android:layout_marginLeft="15dp"
+                >
+                   <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/plus"
+                 android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+                
+            <TextView
+                android:id="@+id/register_user_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_user_default_country_code"
+                 android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                 />
+			</LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:src="@color/colorPrimary" />
+
+            <EditText
+                android:id="@+id/register_user_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:gravity="left|center_vertical"
+                android:hint="@string/register_user_number_hint"
+                android:inputType="phone"
+                android:cursorVisible="true"
+                android:layout_gravity="center"
+                 android:textCursorDrawable="@null"
+                android:maxLength="15"
+                android:paddingLeft="10dp"
+                  android:textSize="18sp"
+                android:textColorHint="#808484"
+                android:background="@android:color/transparent"
+                android:textColor="#808484" />
+        </LinearLayout>
+         <View
+              android:layout_marginTop="6dp"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/register_user_county_code_layout"
+            android:background="@color/colorPrimary"
+            android:id="@+id/view_4"
+            />
+        
+  
+</RelativeLayout>
+  
+</ScrollView>
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+  
+	 android:id="@+id/bottom"
+	 android:layout_alignParentBottom="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/home_login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/ic_launcher"
+            android:visibility="gone"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/home_learn_more_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Continue"
+            android:textColor="@color/colorPrimary"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:gravity="center"
+            android:textAppearance="@android:style/TextAppearance.Large"
+
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <TextView
+             android:layout_width="fill_parent"
+             android:id="@+id/register_user_default_state"
+             android:textSize="12sp"
+             android:layout_marginTop="10dp"
+             android:layout_height="wrap_content"
+             android:text="@string/register_user_default_state"
+              android:textColor="@color/colorAccent"
+              android:gravity="center"
+             />
+         <TextView 
+             android:layout_width="fill_parent"
+             android:id="@+id/register_user_default_state2"
+             android:textSize="12sp"
+             android:paddingLeft="50dp"
+             android:paddingRight="50dp"
+             android:layout_marginTop="10dp"
+             android:layout_height="wrap_content"
+             android:text="@string/register_user_default_state2"
+              android:textColor="@color/colorPrimary"
+             android:visibility="gone"
+              android:gravity="center"
+             />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/terms_of_use"
+            android:textSize="12sp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:padding="3dp"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_of_use_lable"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="onTermsOfUseClick"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/register_user_default_state3"
+            android:textSize="12sp"
+            android:padding="3dp"
+            android:layout_height="wrap_content"
+            android:text="and"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:clickable="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/privicy_policy"
+            android:textSize="12sp"
+            android:padding="3dp"
+            android:layout_height="wrap_content"
+            android:text="@string/privicy_policy_lable"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:clickable="true"
+            android:onClick="onPrivityPolicyClick"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/copyrite"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        android:padding="3dp"
+        android:gravity="center"
+        android:layout_marginBottom="2dp"
+        />
+</LinearLayout>
+    
+
+</RelativeLayout>

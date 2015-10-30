@@ -74,7 +74,6 @@ public class RegisterFragment extends Fragment implements AccountListener {
     private RegisterActivity activity;
     private Prefrences prefrences;
 
-
     public Prefrences getPrefrences() {
         return prefrences;
     }

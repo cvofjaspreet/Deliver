@@ -97,6 +97,7 @@ public class CreateAccount extends Thread {
             getXmpptcpConnection().disconnect();
             getPrefrences().setUserName(Util.getUserName(getEmail()));
             getPrefrences().setPassword(getPassword());
+            getPrefrences().setEmail(getEmail());
             getAccountListener().onSucess();
         } catch (SmackException.NoResponseException e) {
             e.printStackTrace();
@@ -108,6 +109,7 @@ public class CreateAccount extends Thread {
                 doConnect();
                 getPrefrences().setUserName(Util.getUserName(getEmail()));
                 getPrefrences().setPassword(getPassword());
+                getPrefrences().setEmail(getEmail());
                 doLogin();
             }else
             getAccountListener().onError();

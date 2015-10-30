@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
 import jaspreet.deliver.R;
@@ -52,4 +53,17 @@ public class ViewUtil {
             e.printStackTrace();
         }
     }
+    /**
+     * Hide the keybord
+     *
+     * @param editText for control of keybord
+     * @param context of activity
+     */
+    public static void hideKeyBord(View editText,Context context) {
+        // TODO Auto-generated method stub
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                0);
+    }
+
 }

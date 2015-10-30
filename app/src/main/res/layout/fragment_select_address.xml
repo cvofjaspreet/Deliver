@@ -22,7 +22,7 @@
         >
     <TextView android:id="@+id/pickupLocation" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:hint="@string/prompt_pickup"
-        android:inputType="textEmailAddress" android:maxLines="2"
+        android:inputType="textMultiLine" android:maxLines="2"
         android:ellipsize="end"
         android:background="@color/colorPrimaryTransparent"
         android:textColor="@android:color/white"
@@ -34,12 +34,28 @@
         android:drawableLeft="@mipmap/ic_location_on_white_24dp"
         />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <View
             android:layout_width="3dp"
             android:layout_height="40dp"
             android:background="@android:color/white"
             android:layout_marginLeft="40dp"
         ></View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:id="@+id/distance"
+            android:shadowRadius="2"
+            android:shadowColor="@color/colorBlackTransparent"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:layout_height="match_parent" />
+        </LinearLayout>
     <TextView android:id="@+id/dropofLocation" android:layout_width="match_parent"
         android:layout_below="@+id/pickupLocation"
         android:textColor="@android:color/white"
@@ -48,7 +64,7 @@
         android:drawableLeft="@mipmap/ic_location_on_white_24dp"
         android:background="@color/colorPrimaryTransparent"
         android:layout_height="wrap_content" android:hint="@string/prompt_dropoff"
-        android:inputType="textEmailAddress" android:maxLines="2"
+        android:inputType="textMultiLine" android:maxLines="2"
         android:drawableRight="@mipmap/ic_location_searching_white_24dp"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:drawablePadding="10dp"

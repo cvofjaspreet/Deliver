@@ -25,6 +25,7 @@ import jaspreet.deliver.R;
 import jaspreet.deliver.activities.MainActivity;
 import jaspreet.deliver.database.Prefrences;
 import jaspreet.deliver.utils.Config;
+import jaspreet.deliver.utils.PhotoUtil;
 
 /**
  * Created by jaspret on 12/10/15.
@@ -92,13 +93,13 @@ public class SetProfileFragment extends Fragment {
         });
 
         if(getPrefrences().isFbConnected()){
-
             Profile profile=Profile.getCurrentProfile();
                     Uri uri=profile.getProfilePictureUri(profilePic.getLayoutParams().width, profilePic.getLayoutParams().height);
                     String path=uri.toString();
                     Picasso.with(activity)
                     .load(path)
                     .into(profilePic);
+            getPrefrences().setUserPicUrl(path);
             nickName.append(profile.getName());
         }
 
@@ -111,6 +112,7 @@ public class SetProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getPrefrences().setProfile(true);
+                getPrefrences().setNickName(nickName.getText().toString().trim());
                 Intent intent = new Intent(activity, MainActivity.class);
                 startActivity(intent);
                 activity.finish();

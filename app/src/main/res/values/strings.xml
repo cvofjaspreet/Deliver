@@ -11,8 +11,13 @@
     <string name="not_connected_to_server">Not connected to server</string>
     <string name="no_auth_to_server">Connection is not authenticated</string>
     <string name="connection_is_null">Connection is null</string>
-    <string name="title_activity_register">Register</string>
+    <string name="sms_wait">Waiting for SMS auto verification ...</string>
 
+    <!--Terms of Use -->
+    <string name="terms_of_use_lable">Terms Of Service</string>
+    <!--privicy policy -->
+    <string name="privicy_policy_lable">Privacy Policy</string>
+    <string name="copyrite">Copyright 2015 Deliver</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_nickname">Nick name</string>
@@ -36,4 +41,46 @@
     <!--For Address-->
     <string name="prompt_pickup">Select pickup address</string>
     <string name="prompt_dropoff">Select destination address</string>
+    <!--Headings-->
+
+    <string name="header_register">Sign Up</string>
+    <string name="header_select_country_code">Select Country Code</string>
+
+
+    <!--For Register-->
+    <string name="register_user_lable">User Registration</string>
+    <string name="title_activity_register">Registration</string>
+    <string name="title_activity_splash">Splash</string>
+    <string name="splash_video_text_0">Share amazing moments of your \nlife with people that matter!</string>
+    <string name="splash_video_text_1">Select friends and family members from your local address book and invite them to view your live videos.</string>
+    <string name="splash_video_text_2">Allow your facebook friends and twitter followers to view your live videos by posting invites on your facebook and twitter timeline.</string>
+    <string name="splash_video_text_3">Chat with your family and friends as they watch your live videos.</string>
+    <string name="splash_video_text_1_footer">*Your video is only shared with people you select and their contacts.</string>
+    <string name="splash_video_text_3_footer">*And don\'t worry; your chat logs are deleted instantly.</string>
+    <string name="register_user_default_country">United States</string>
+    <string name="register_user_default_country_code">1</string>
+    <string name="register_user_default_state">By signing up, you accept Wingtrill\'s</string>
+    <string name="register_user_default_state2">By signing up, you agree to</string>
+    <string name="register_user_default_state3"> Terms of service and Privacy Policy</string>
+    <string name="register_user_number_hint">Your phone number</string>
+    <string name="register_user_text">Please confirm your country and enter your phone number. We will NEVER share your number. EVER</string>
+    <string name="register_user_text_friends">This will help your friends find you!</string>
+
+    <!-- confirm code -->
+    <string name="confirm_code_lable">Register</string>
+    <string name="enter_password">Please enter</string>
+    <string name="enter_password1">Check your mobile phone for the activation code just sent to you via SMS and insert that code to confirm.</string>
+    <string name="enter_password2">password</string>
+    <string name="enter_password3">Sent via SMS</string>
+    <string name="resend_button">Resend Password</string>
+    <string name="confirm_button">Confirm</string>
+
+    <!-- CATEGORIES ARRAY -->
+
+    <string-array name="categories">
+        <item>Electronic</item>
+        <item>Men</item>
+        <item>Women</item>
+        <item>Children</item>
+    </string-array>
 </resources>

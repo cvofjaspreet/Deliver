@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+           android:layout_gravity="center_horizontal"
+        >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+    <TextView
+        android:id="@+id/confirm_code_text1"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_password"
+		android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/confirm_code_text2"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_password1"
+
+		android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        />
+    <TextView
+        android:id="@+id/confirm_code_text3"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_password2"
+		android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:gravity="center"
+
+        />
+   </LinearLayout>
+
+      <TextView
+        android:id="@+id/confirm_code_text4"
+        android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_password3"
+		android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:gravity="center"
+          android:visibility="gone"
+        android:layout_marginLeft="3dp"
+
+        />
+
+</LinearLayout>
+         <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="75dp"
+            />
+    <RelativeLayout
+android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/validationBar"
+        >
+      
+        <EditText
+        android:layout_width="wrap_content"
+        android:gravity="start"
+            android:maxLength="6"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/confirm_code_code"
+            android:layout_centerInParent="true"
+            android:hint="-----"
+            android:scaleX="1.2"
+            android:textColorHint="@color/colorPrimary"
+            android:textAppearance="@android:style/TextAppearance.Large"
+        android:background="@android:color/transparent"
+        />
+    </RelativeLayout>
+
+       <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="5dp"
+            />
+       <TextView
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+           android:gravity="center"
+           android:visibility="gone"
+           android:text="A confirmation code was sent to your phone."
+           android:textColor="@color/colorAccent"
+            />
+
+       <TextView
+           android:layout_width="fill_parent"
+           android:gravity="center"
+           android:layout_height="wrap_content"
+           android:text="It should be there soon"
+           android:visibility="gone"
+           android:textColor="@color/colorAccent"
+           />
+     <TextView
+         android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resend_button"
+        android:textSize="15sp"
+         android:textAppearance="@android:style/TextAppearance.Large"
+         android:paddingLeft="10dp"
+         android:paddingRight="10dp"
+         android:paddingTop="2dp"
+         android:paddingBottom="2dp"
+         android:gravity="center"
+         android:clickable="true"
+        android:textColor="@color/white"
+        android:onClick="onResendClick"
+
+        android:id="@+id/confirm_code_cancel"
+        android:layout_gravity="center_horizontal"
+        />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+   android:orientation="vertical"
+   android:padding="20dp"
+   android:background="@color/colorPrimary"
+   android:id="@+id/confirm_layout"
+    >
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/confirm_code_text5"
+        android:text="@string/sms_wait"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="20sp"
+        />
+	<ProgressBar
+	    android:layout_marginTop="20dp"
+	    		android:padding="20dp"
+        android:minHeight="5dip"
+        android:maxHeight="5dip"
+               android:id="@+id/wait_progressbar"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/view_custom_progress"
+               android:indeterminate="false"
+               android:indeterminateOnly="false" />
+</LinearLayout>
+</RelativeLayout>

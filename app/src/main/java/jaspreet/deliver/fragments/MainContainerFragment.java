@@ -44,7 +44,7 @@ public class MainContainerFragment extends Fragment {
             public void onClick(View v) {
                  Fragment fragment = SelectLocationFragment.getInstance();
                 android.support.v4.app.FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.container, fragment, "selectDestination").addToBackStack("selectDestination");
+                ft.replace(R.id.container, fragment, "selectDestination"+Math.random()).addToBackStack("selectDestination");
                 ft.commit();
 
             }

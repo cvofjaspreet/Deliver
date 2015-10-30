@@ -22,15 +22,20 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.Arrays;
 
 import jaspreet.deliver.R;
 import jaspreet.deliver.database.Prefrences;
 import jaspreet.deliver.fragments.RegisterFragment;
+import jaspreet.deliver.fragments.RegisterUserFragment;
 import jaspreet.deliver.fragments.SetProfileFragment;
+import jaspreet.deliver.service.MyGcmRegistrationService;
 import jaspreet.deliver.utils.Config;
 import jaspreet.deliver.utils.Util;
+import jaspreet.deliver.utils.ViewUtil;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,12 +45,13 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class RegisterActivity extends AppCompatActivity  {
 
     private static String TAG="";
+    private final int RQS_GooglePlayServices = 1;
     private Prefrences prefrences;
-
+    public String countryName="United States",countryCode="1";
     public Prefrences getPrefrences() {
         return prefrences;
     }
-
+    public Toolbar toolbar;
     public void setPrefrences(Prefrences prefrences) {
         this.prefrences = prefrences;
     }
@@ -55,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         TAG=getClass().getName();
         setContentView(R.layout.activity_register);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -65,6 +71,25 @@ public class RegisterActivity extends AppCompatActivity  {
         openRegisterFragment();
 
 //        Util.getKeyHash(RegisterActivity.this);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkGooglePlayService();
+    }
+
+    public void checkGooglePlayService(){
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+
+        if (resultCode != ConnectionResult.SUCCESS){
+            GooglePlayServicesUtil.getErrorDialog(resultCode, this, RQS_GooglePlayServices);
+        }else{
+            Intent intent = new Intent(this, MyGcmRegistrationService.class);
+            startService(intent);
+        }
 
     }
 
@@ -81,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity  {
 
     public void openRegisterFragment(){
         if(!getPrefrences().isRegistered()) {
-            Fragment programList = new RegisterFragment();
+            Fragment programList = new RegisterUserFragment();
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, programList, "register");
             ft.commit();

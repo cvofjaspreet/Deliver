@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,17 +52,29 @@ public class SelectLocationFragment extends Fragment  implements RoutingListener
     int PLACE_PICKER_REQUEST_DESTINATION = 2;
     private GoogleMap googleMap;
     private MainActivity mainActivity;
-    private TextView pickupLocation,dropofLocation;
+    private TextView pickupLocation,dropofLocation,distanceTextView;
     private static SelectLocationFragment selectLocationFragment;
     protected LatLng start;
     protected LatLng end;
     private ProgressDialog progressDialog;
     private ArrayList<Polyline> polylines;
-    private int[] colors = new int[]{R.color.colorPrimary,R.color.colorPrimary,R.color.colorPrimary,R.color.colorPrimary,R.color.primary_dark_material_light};
+    private FloatingActionButton fab;
+    private static View view;
+    private String distance;
+    private int[] colors = new int[]{R.color.colorPrimary,R.color.colorAccent,R.color.colorBlackTransparent,R.color.colorPrimaryTransparent,R.color.primary_dark_material_light};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_select_address,null);
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
+        try {
+         view=inflater.inflate(R.layout.fragment_select_address,null);
+        } catch (InflateException e) {
+        /* map is already there, just return view as it is */
+        }
         mainActivity=(MainActivity)getActivity();
         TAG=getClass().getName();
         polylines=new ArrayList<>();
@@ -71,26 +84,23 @@ public class SelectLocationFragment extends Fragment  implements RoutingListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
-                R.id.map)).getMap();
+        if (googleMap == null)
+            googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
+                    R.id.map)).getMap();
         pickupLocation=(TextView)view.findViewById(R.id.pickupLocation);
         dropofLocation=(TextView)view.findViewById(R.id.dropofLocation);
-
+        distanceTextView=(TextView)view.findViewById(R.id.distance);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-            @Override
-            public void onMyLocationChange(Location location) {
-            LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
-         googleMap.addMarker(new MarkerOptions().position(latLng));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ViewUtil.showStackBar(view, "will replce", mainActivity);
+                Fragment fragment = new SelectDateFragment();
+                android.support.v4.app.FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.container, fragment, "selectDestination"+Math.random()).addToBackStack("selectDestination");
+                ft.commit();
+
             }
         });
         onPickupClick();
@@ -157,6 +167,17 @@ public class SelectLocationFragment extends Fragment  implements RoutingListener
 
         if(!pickupLocation.getText().toString().trim().equals("") && !dropofLocation.getText().toString().trim().equals("")){
             sendRequest(pickupLocation);
+            fab.setVisibility(View.VISIBLE);
+        }else{
+            CameraUpdate center = CameraUpdateFactory.newLatLng(place.getLatLng());
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
+            googleMap.moveCamera(center);
+            googleMap.animateCamera(zoom);
+            MarkerOptions options = new MarkerOptions();
+            options.position(place.getLatLng());
+            options.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_location_on_white_24dp));
+            googleMap.addMarker(options);
         }
 
     }
@@ -215,7 +236,10 @@ public class SelectLocationFragment extends Fragment  implements RoutingListener
         polylines = new ArrayList<>();
         //add route(s) to the map.
         for (int i = 0; i <route.size(); i++) {
-
+            if (i == 0){
+                distance = route.get(0).getDistanceText();
+            distanceTextView.setText(distance);
+        }
             //In case of more than 5 alternative routes
             int colorIndex = i % colors.length;
 
